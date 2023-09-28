@@ -26,10 +26,10 @@ exports.blogsRepositories = {
                 description,
                 websiteUrl,
                 createdAt: new Date().toISOString(),
-                isMembership: true
+                isMembership: true,
             };
             const result = yield db_blogs_1.blogsCollection.insertOne(newBlog);
             return newBlog;
         });
-    }
+    },
 };
