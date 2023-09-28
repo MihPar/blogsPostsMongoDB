@@ -1,9 +1,11 @@
 import { BlogsType } from "../db/db_blogs";
+import { authMiddleware } from "../middleware/authrorisation";
 import {
   inputBlogNameValidator,
   inputBlogsDescription,
   inputBlogsWebsiteUrl,
 } from "../middleware/blogs_input_value_middleware";
+import { ValueMiddleware } from "../middleware/validatorMiddleware";
 import { blogsRepositories } from "../repositories/blogs_db_repositories";
 import { HTTP_STATUS } from "../utils";
 import { Router, Request, Response } from "express";
@@ -17,6 +19,8 @@ blogsRouter.get("/", async function (req: Request, res: Response) {
 
 blogsRouter.post(
   "/",
+  ValueMiddleware,
+  authMiddleware,
   inputBlogNameValidator,
   inputBlogsDescription,
   inputBlogsWebsiteUrl,
