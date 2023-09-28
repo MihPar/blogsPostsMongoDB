@@ -12,20 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runDb = exports.productsCollection = exports.client = void 0;
+exports.runDbPosts = exports.postsCollection = exports.client = void 0;
+const db_blogs_1 = require("./db_blogs");
 const mongodb_1 = require("mongodb");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const mongoURI = process.env.MONGO_URL || 'mongodb+srv://MihPar:MihPar1981@cluster0.e2lfxsd.mongodb.net/?retryWrites=true&w=majority';
 console.log(process.env.MONGO_URL);
 exports.client = new mongodb_1.MongoClient(mongoURI);
-const db = exports.client.db('shop');
-exports.productsCollection = db.collection('products');
-function runDb() {
+exports.postsCollection = db_blogs_1.db.collection('posts');
+function runDbPosts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield exports.client.connect();
-            yield exports.client.db('products').command({ ping: 1 });
+            yield exports.client.db('posts').command({ ping: 1 });
             console.log('Connect successfully to mongo server');
         }
         catch (_a) {
@@ -34,4 +34,4 @@ function runDb() {
         }
     });
 }
-exports.runDb = runDb;
+exports.runDbPosts = runDbPosts;

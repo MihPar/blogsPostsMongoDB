@@ -3,22 +3,26 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export type ProductType = {
-	id: number
-	title: string
+export type BlogsType = {
+	id: string
+    name: string
+    description: string
+    websiteUrl: string
+    createdAt: string
+    isMembership: boolean
   }
 
 const mongoURI = process.env.MONGO_URL || 'mongodb+srv://MihPar:MihPar1981@cluster0.e2lfxsd.mongodb.net/?retryWrites=true&w=majority'
 console.log(process.env.MONGO_URL)
 
 export const client = new MongoClient(mongoURI)
-const db = client.db('shop')
-export const productsCollection = db.collection<ProductType>('products')
+export const db = client.db('bd')
+export const blogsCollection = db.collection<BlogsType>('blogs')
 
-export async function runDb() {
+export async function runDbBlogs() {
 	try {
 		await client.connect()
-		await client.db('products').command({ping: 1})
+		await client.db('blogs').command({ping: 1})
 		console.log('Connect successfully to mongo server')
 	} catch {
 		console.log('Cann`t to connect to db')

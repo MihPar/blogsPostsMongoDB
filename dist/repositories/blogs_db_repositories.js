@@ -10,9 +10,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.blogsRepositories = void 0;
+const db_blogs_1 = require("../db/db_blogs");
 exports.blogsRepositories = {
     findAllBlogs() {
         return __awaiter(this, void 0, void 0, function* () {
+            const filtered = {};
+            return db_blogs_1.blogsCollection.find(filtered).toArray();
+        });
+    },
+    createNewBlog(name, description, websiteUrl) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newBlog = {
+                id: new Date().toISOString(),
+                name,
+                description,
+                websiteUrl,
+                createdAt: new Date().toISOString(),
+                isMembership: true
+            };
+            const result = yield db_blogs_1.blogsCollection.insertOne(newBlog);
+            return newBlog;
         });
     }
 };
