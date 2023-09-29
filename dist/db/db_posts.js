@@ -26,7 +26,7 @@ function runDbPosts() {
         try {
             yield exports.client.connect();
             yield exports.client.db('posts').command({ ping: 1 });
-            console.log('Connect successfully to mongo server');
+            console.log('Connect successfully to mongoPosts server');
         }
         catch (_a) {
             console.log('Cann`t to connect to db');

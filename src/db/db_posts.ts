@@ -24,7 +24,7 @@ export async function runDbPosts() {
 	try {
 		await client.connect()
 		await client.db('posts').command({ping: 1})
-		console.log('Connect successfully to mongo server')
+		console.log('Connect successfully to mongoPosts server')
 	} catch {
 		console.log('Cann`t to connect to db')
 		await client.close()
