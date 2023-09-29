@@ -12,15 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runDbPosts = exports.postsCollection = exports.client = void 0;
-const db_blogs_1 = require("./db_blogs");
+exports.runDbPosts = exports.client = void 0;
 const mongodb_1 = require("mongodb");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017';
 console.log(process.env.MONGO_URL);
 exports.client = new mongodb_1.MongoClient(mongoURI);
-exports.postsCollection = db_blogs_1.db.collection('posts');
 function runDbPosts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.blogsRepositories = void 0;
-const db_blogs_1 = require("../db/db_blogs");
+const db_1 = require("../db/db");
 exports.blogsRepositories = {
     findAllBlogs() {
         return __awaiter(this, void 0, void 0, function* () {
             const filtered = {};
-            return db_blogs_1.blogsCollection.find(filtered).toArray();
+            return db_1.blogsCollection.find(filtered).toArray();
         });
     },
     createNewBlog(name, description, websiteUrl) {
@@ -28,31 +28,31 @@ exports.blogsRepositories = {
                 createdAt: new Date().toISOString(),
                 isMembership: true,
             };
-            const result = yield db_blogs_1.blogsCollection.insertOne(newBlog);
+            const result = yield db_1.blogsCollection.insertOne(newBlog);
             return newBlog;
         });
     },
     findBlogId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const blogId = yield db_blogs_1.blogsCollection.findOne({ id: id });
+            const blogId = yield db_1.blogsCollection.findOne({ id: id });
             return blogId ? blogId : null;
         });
     },
     updateBlogId(id, name, description, websiteUrl) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield db_blogs_1.blogsCollection.updateOne({ id: id }, { $set: { name: name, description: description, websiteUrl: websiteUrl } });
+            const result = yield db_1.blogsCollection.updateOne({ id: id }, { $set: { name: name, description: description, websiteUrl: websiteUrl } });
             return result.upsertedCount === 1;
         });
     },
     deleteId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const deleteBlogId = yield db_blogs_1.blogsCollection.deleteOne({ id: id });
+            const deleteBlogId = yield db_1.blogsCollection.deleteOne({ id: id });
             return deleteBlogId.deletedCount === 1;
         });
     },
     deleteAllBlogs() {
         return __awaiter(this, void 0, void 0, function* () {
-            const deletedAll = yield db_blogs_1.blogsCollection.deleteMany({});
+            const deletedAll = yield db_1.blogsCollection.deleteMany({});
             return deletedAll.deletedCount === 1;
         });
     }

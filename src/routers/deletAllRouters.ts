@@ -1,9 +1,9 @@
 import { postsRepositories } from './../repositories/posts_db_repositories';
 import { blogsRepositories } from './../repositories/blogs_db_repositories';
 import { authMiddleware } from './../middleware/authrorisation';
-import { blogsCollection } from './../db/db_blogs';
+import { blogsCollection } from '../db/db';
 import { blogsRouter } from './blogs_router';
-import { postsCollection } from './../db/db_posts';
+import { postsCollection } from '../db/db';
 import { Router, Request, Response } from "express"
 import { postsRouter } from "./posts_router"
 import { HTTP_STATUS } from '../utils';

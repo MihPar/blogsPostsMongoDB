@@ -4,7 +4,7 @@ import {
   inputPostsContentValidator,
   inpurtPostsBlogIdValidator,
 } from "./../middleware/posts_input_value_middleware";
-import { PostsType } from "../db/db_posts";
+import { PostsType } from "../db/db";
 import { HTTP_STATUS } from "../utils";
 import { postsRepositories } from "./../repositories/posts_db_repositories";
 import { Router, Request, Response } from "express";

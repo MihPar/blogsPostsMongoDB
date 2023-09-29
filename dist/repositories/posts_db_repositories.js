@@ -10,18 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRepositories = void 0;
-const db_blogs_1 = require("./../db/db_blogs");
-const db_posts_1 = require("./../db/db_posts");
+const db_1 = require("../db/db");
+const db_2 = require("../db/db");
 exports.postsRepositories = {
     findAllPosts() {
         return __awaiter(this, void 0, void 0, function* () {
             const filtered = {};
-            return db_posts_1.postsCollection.find(filtered).toArray();
+            return db_2.postsCollection.find(filtered).toArray();
         });
     },
     updatePost(title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const blog = yield db_blogs_1.blogsCollection.findOne({ id: blogId });
+            const blog = yield db_1.blogsCollection.findOne({ id: blogId });
             // if(!blog) return null
             const newPost = {
                 id: new Date().toISOString(),
@@ -32,31 +32,31 @@ exports.postsRepositories = {
                 blogName: blog.name,
                 createdAt: new Date().toISOString()
             };
-            const post = yield db_posts_1.postsCollection.insertOne(newPost);
+            const post = yield db_2.postsCollection.insertOne(newPost);
             return newPost;
         });
     },
     findPostId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const postId = yield db_posts_1.postsCollection.findOne({ id: id });
+            const postId = yield db_2.postsCollection.findOne({ id: id });
             return postId ? postId : null;
         });
     },
     updatePostId(id, title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield db_posts_1.postsCollection.updateOne({ id: id }, { $set: { title: title, shortDescription: shortDescription, content: content, blogId: blogId } });
+            const result = yield db_2.postsCollection.updateOne({ id: id }, { $set: { title: title, shortDescription: shortDescription, content: content, blogId: blogId } });
             return result.upsertedCount === 1;
         });
     },
     deletePostId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const deletePostId = yield db_posts_1.postsCollection.deleteOne({ id: id });
+            const deletePostId = yield db_2.postsCollection.deleteOne({ id: id });
             return deletePostId.deletedCount === 1;
         });
     },
     deleteAllPosts() {
         return __awaiter(this, void 0, void 0, function* () {
-            const deletedAll = yield db_posts_1.postsCollection.deleteMany({});
+            const deletedAll = yield db_2.postsCollection.deleteMany({});
             return deletedAll.deletedCount === 1;
         });
     }

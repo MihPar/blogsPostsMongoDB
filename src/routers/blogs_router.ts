@@ -1,4 +1,4 @@
-import { BlogsType } from "../db/db_blogs";
+import { BlogsType } from "../db/db";
 import { authMiddleware } from "../middleware/authrorisation";
 import {
   inputBlogNameValidator,
