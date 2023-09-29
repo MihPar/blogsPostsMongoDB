@@ -12,11 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletedAllRouters = void 0;
 const posts_db_repositories_1 = require("./../repositories/posts_db_repositories");
 const blogs_db_repositories_1 = require("./../repositories/blogs_db_repositories");
-const authrorisation_1 = require("./../middleware/authrorisation");
 const express_1 = require("express");
 const utils_1 = require("../utils");
 exports.deletedAllRouters = (0, express_1.Router)({});
-exports.deletedAllRouters.delete('/', authrorisation_1.authMiddleware, function (req, res) {
+exports.deletedAllRouters.delete('/', function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         yield blogs_db_repositories_1.blogsRepositories.deleteAllBlogs();
         yield posts_db_repositories_1.postsRepositories.deleteAllPosts();

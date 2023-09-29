@@ -10,7 +10,7 @@ import { HTTP_STATUS } from '../utils';
 
 export const deletedAllRouters = Router({})
 
-deletedAllRouters.delete('/', authMiddleware,  async function(req: Request, res: Response) {
+deletedAllRouters.delete('/', async function(req: Request, res: Response) {
 	await blogsRepositories.deleteAllBlogs()
 	await postsRepositories.deleteAllPosts()
 	res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
