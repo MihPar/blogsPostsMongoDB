@@ -10,12 +10,12 @@ const deletedAllRouters = Router({})
 
 deletedAllRouters.delete('/', authMiddleware,  async function(req: Request, res: Response) {
 	blogsRouter.delete('/', authMiddleware, async function(req: Request, res: Response) {
-		const deleteAllBlogs = await blogsCollection.deleteMany({})
-		// res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
+		await blogsCollection.deleteMany({})
+		res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 	})
 	postsRouter.delete('/', authMiddleware, async function(req: Request, res: Response) {
-		const deleteAllPosts = await postsCollection.deleteMany({})
-		// res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
+		await postsCollection.deleteMany({})
+		res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 	})
 	res.status(HTTP_STATUS.NO_CONTENT_204).send('All data is deleted')
 })
