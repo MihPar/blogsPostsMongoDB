@@ -1,3 +1,5 @@
+import { postsRepositories } from './../repositories/posts_db_repositories';
+import { blogsRepositories } from './../repositories/blogs_db_repositories';
 import { authMiddleware } from './../middleware/authrorisation';
 import { blogsCollection } from './../db/db_blogs';
 import { blogsRouter } from './blogs_router';
@@ -9,13 +11,7 @@ import { HTTP_STATUS } from '../utils';
 export const deletedAllRouters = Router({})
 
 deletedAllRouters.delete('/', authMiddleware,  async function(req: Request, res: Response) {
-	blogsRouter.delete('/', authMiddleware, async function(req: Request, res: Response) {
-		await blogsCollection.deleteMany({})
-		res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
-	})
-	postsRouter.delete('/', authMiddleware, async function(req: Request, res: Response) {
-		await postsCollection.deleteMany({})
-		res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
-	})
-	res.status(HTTP_STATUS.NO_CONTENT_204).send('All data is deleted')
+	await blogsRepositories.deleteAllBlogs()
+	await postsRepositories.deleteAllPosts()
+	res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 })
