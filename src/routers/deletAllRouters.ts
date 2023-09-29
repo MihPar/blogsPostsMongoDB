@@ -6,7 +6,7 @@ import { Router, Request, Response } from "express"
 import { postsRouter } from "./posts_router"
 import { HTTP_STATUS } from '../utils';
 
-const deletedAllRouters = Router({})
+export const deletedAllRouters = Router({})
 
 deletedAllRouters.delete('/', authMiddleware,  async function(req: Request, res: Response) {
 	blogsRouter.delete('/', authMiddleware, async function(req: Request, res: Response) {
