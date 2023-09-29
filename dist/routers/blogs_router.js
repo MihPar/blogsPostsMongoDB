@@ -17,15 +17,51 @@ const blogs_db_repositories_1 = require("../repositories/blogs_db_repositories")
 const utils_1 = require("../utils");
 const express_1 = require("express");
 exports.blogsRouter = (0, express_1.Router)({});
+/******************************* get **********************************/
 exports.blogsRouter.get("/", function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const getAllBlogs = yield blogs_db_repositories_1.blogsRepositories.findAllBlogs();
         res.status(utils_1.HTTP_STATUS.OK_200).json(getAllBlogs);
     });
 });
-exports.blogsRouter.post("/", validatorMiddleware_1.ValueMiddleware, authrorisation_1.authMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescription, blogs_input_value_middleware_1.inputBlogsWebsiteUrl, function (req, res) {
+/******************************* post **********************************/
+exports.blogsRouter.post("/", validatorMiddleware_1.ValueMiddleware, authrorisation_1.authMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescriptionValidator, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidator, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const newPost = yield blogs_db_repositories_1.blogsRepositories.createNewBlog(req.body.name, req.body.description, req.body.websiteUrl);
         res.status(utils_1.HTTP_STATUS.CREATED_201).json(newPost);
+    });
+});
+/******************************* get{id} **********************************/
+exports.blogsRouter.get("/:id", function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const blogId = yield blogs_db_repositories_1.blogsRepositories.findBlogId(req.params.id);
+        if (!blogId) {
+            res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
+        }
+        else {
+            res.sendStatus(utils_1.HTTP_STATUS.OK_200);
+        }
+    });
+});
+/******************************* put{id} **********************************/
+exports.blogsRouter.put("/:id", authrorisation_1.authMiddleware, validatorMiddleware_1.ValueMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescriptionValidator, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidator, function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const updateBlogId = yield blogs_db_repositories_1.blogsRepositories.updateBlogId(req.params.id, req.body.name, req.body.description, req.body.websiteUrl);
+        if (!updateBlogId) {
+            res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
+        }
+        else {
+            res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
+        }
+    });
+});
+/******************************* delete{id} **********************************/
+exports.blogsRouter.delete('/:id', authrorisation_1.authMiddleware, function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const deleteBlogId = yield blogs_db_repositories_1.blogsRepositories.deleteId(req.params.id);
+        if (!deleteBlogId) {
+            res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
+        }
+        res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
     });
 });

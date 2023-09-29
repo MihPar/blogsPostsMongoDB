@@ -17,6 +17,7 @@ const db_posts_1 = require("./db/db_posts");
 const express_1 = __importDefault(require("express"));
 const posts_router_1 = require("./routers/posts_router");
 const blogs_router_1 = require("./routers/blogs_router");
+const deletAllRouters_1 = require("./routers/deletAllRouters");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
 const startApp = function () {
@@ -26,6 +27,7 @@ const startApp = function () {
         app.use(express_1.default.json());
         app.use('/posts', posts_router_1.postsRouter);
         app.use('/blogs', blogs_router_1.blogsRouter);
+        app.use('/testing/all-data', deletAllRouters_1.deletedAllRouters);
         app.listen(PORT, function () { console.log(`Server was started at port ${PORT}`); });
         return app;
     });

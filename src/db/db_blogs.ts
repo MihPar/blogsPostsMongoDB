@@ -12,7 +12,7 @@ export type BlogsType = {
     isMembership: boolean
   }
 
-const mongoURI = process.env.MONGO_URL || 'mongodb+srv://MihPar:MihPar1981@cluster0.e2lfxsd.mongodb.net/?retryWrites=true&w=majority'
+const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017'
 console.log(process.env.MONGO_URL)
 
 export const client = new MongoClient(mongoURI)

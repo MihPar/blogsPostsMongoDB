@@ -17,7 +17,7 @@ const db_blogs_1 = require("./db_blogs");
 const mongodb_1 = require("mongodb");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const mongoURI = process.env.MONGO_URL || 'mongodb+srv://MihPar:MihPar1981@cluster0.e2lfxsd.mongodb.net/?retryWrites=true&w=majority';
+const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017';
 console.log(process.env.MONGO_URL);
 exports.client = new mongodb_1.MongoClient(mongoURI);
 exports.postsCollection = db_blogs_1.db.collection('posts');
