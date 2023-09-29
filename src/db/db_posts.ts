@@ -4,8 +4,13 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export type PostsType = {
-	id: number
-	title: string
+	id: string
+    title: string
+    shortDescription: string
+    content: string
+    blogId: string
+    blogName: string
+    createdAt: string
   }
 
 const mongoURI = process.env.MONGO_URL || 'mongodb+srv://MihPar:MihPar1981@cluster0.e2lfxsd.mongodb.net/?retryWrites=true&w=majority'

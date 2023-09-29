@@ -12,10 +12,13 @@ import { Router, Request, Response } from "express";
 
 export const blogsRouter = Router({});
 
+/******************************* get **********************************/
 blogsRouter.get("/", async function (req: Request, res: Response) {
   const getAllBlogs: BlogsType[] = await blogsRepositories.findAllBlogs();
   res.status(HTTP_STATUS.OK_200).json(getAllBlogs);
 });
+
+/******************************* post **********************************/
 
 blogsRouter.post(
   "/",
@@ -34,6 +37,8 @@ blogsRouter.post(
   }
 );
 
+/******************************* get{id} **********************************/
+
 blogsRouter.get("/:id", async function (req: Request, res: Response) {
   const blogId = await blogsRepositories.findBlogId(req.params.id);
   if (!blogId) {
@@ -42,6 +47,8 @@ blogsRouter.get("/:id", async function (req: Request, res: Response) {
     res.sendStatus(HTTP_STATUS.OK_200);
   }
 });
+
+/******************************* put{id} **********************************/
 
 blogsRouter.put(
   "/:id",
@@ -64,6 +71,8 @@ blogsRouter.put(
     }
   }
 );
+
+/******************************* delete{id} **********************************/
 
 blogsRouter.delete('/:id', authMiddleware, async function(req: Request, res: Response) {
 	const deleteBlogId = await blogsRepositories.deleteId(req.params.id)
