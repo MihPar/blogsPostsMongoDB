@@ -22,4 +22,24 @@ export const blogsRepositories = {
     const result = await blogsCollection.insertOne(newBlog);
     return newBlog;
   },
+  async findBlogId(id: string): Promise<BlogsType | null> {
+    const blogId = await blogsCollection.findOne({ id: id });
+    return blogId ? blogId : null;
+  },
+  async updateBlogId(
+    id: string,
+    name: string,
+    description: string,
+    websiteUrl: string
+  ): Promise<boolean> {
+    const result = await blogsCollection.updateOne(
+      { id: id },
+      { $set: { name: name, description: description, websiteUrl: websiteUrl } }
+    );
+    return result.upsertedCount === 1;
+  },
+  async deleteId(id: string): Promise<boolean> {
+	const deleteBlogId = await blogsCollection.deleteOne({id: id})
+	return deleteBlogId.deletedCount === 1
+  }
 };
