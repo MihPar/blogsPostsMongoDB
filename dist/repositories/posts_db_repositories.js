@@ -19,7 +19,7 @@ exports.postsRepositories = {
             return db_2.postsCollection.find(filtered, { projection: { _id: 0 } }).toArray();
         });
     },
-    updatePost(title, shortDescription, content, blogId) {
+    createPost(title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
             const blog = yield db_1.blogsCollection.findOne({ id: blogId });
             // if(!blog) return null

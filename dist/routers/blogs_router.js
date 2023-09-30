@@ -25,7 +25,7 @@ exports.blogsRouter.get("/", function (req, res) {
     });
 });
 /******************************* post **********************************/
-exports.blogsRouter.post("/", validatorMiddleware_1.ValueMiddleware, authrorisation_1.authMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescriptionValidator, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidator, function (req, res) {
+exports.blogsRouter.post("/", authrorisation_1.authMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescriptionValidator, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidator, validatorMiddleware_1.ValueMiddleware, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const newPost = yield blogs_db_repositories_1.blogsRepositories.createNewBlog(req.body.name, req.body.description, req.body.websiteUrl);
         res.status(utils_1.HTTP_STATUS.CREATED_201).json(newPost);
@@ -44,7 +44,7 @@ exports.blogsRouter.get("/:id", function (req, res) {
     });
 });
 /******************************* put{id} **********************************/
-exports.blogsRouter.put("/:id", authrorisation_1.authMiddleware, validatorMiddleware_1.ValueMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescriptionValidator, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidator, function (req, res) {
+exports.blogsRouter.put("/:id", authrorisation_1.authMiddleware, blogs_input_value_middleware_1.inputBlogNameValidator, blogs_input_value_middleware_1.inputBlogsDescriptionValidator, blogs_input_value_middleware_1.inputBlogsWebsiteUrlValidator, validatorMiddleware_1.ValueMiddleware, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const updateBlogId = yield blogs_db_repositories_1.blogsRepositories.updateBlogId(req.params.id, req.body.name, req.body.description, req.body.websiteUrl);
         if (!updateBlogId) {

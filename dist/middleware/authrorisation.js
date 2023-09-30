@@ -17,7 +17,7 @@ const authMiddleware = function (req, res, next) {
         return next();
     }
     catch (err) {
-        console.log("err", err);
+        res.sendStatus(utils_1.HTTP_STATUS.NOT_WORK_SERVER_500);
     }
 };
 exports.authMiddleware = authMiddleware;

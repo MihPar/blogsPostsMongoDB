@@ -19,6 +19,6 @@ export const authMiddleware = function (
       return res.sendStatus(HTTP_STATUS.NOT_AUTHORIZATION_401);
     return next();
   } catch (err) {
-    console.log("err", err);
+	res.sendStatus(HTTP_STATUS.NOT_WORK_SERVER_500)
   }
 };

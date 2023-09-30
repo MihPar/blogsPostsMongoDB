@@ -25,9 +25,9 @@ exports.postsRouter.get("/", function (req, res) {
     });
 });
 /******************************* post **********************************/
-exports.postsRouter.post("/", authrorisation_1.authMiddleware, validatorMiddleware_1.ValueMiddleware, posts_input_value_middleware_1.inputPosstTitleValidator, posts_input_value_middleware_1.inputPostsShortDescriptionValidator, posts_input_value_middleware_1.inputPostsContentValidator, posts_input_value_middleware_1.inpurtPostsBlogIdValidator, function (req, res) {
+exports.postsRouter.post("/", authrorisation_1.authMiddleware, posts_input_value_middleware_1.inputPosstTitleValidator, posts_input_value_middleware_1.inputPostsShortDescriptionValidator, posts_input_value_middleware_1.inputPostsContentValidator, posts_input_value_middleware_1.inpurtPostsBlogIdValidator, validatorMiddleware_1.ValueMiddleware, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const createNewPost = yield posts_db_repositories_1.postsRepositories.updatePost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
+        const createNewPost = yield posts_db_repositories_1.postsRepositories.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
         res.status(utils_1.HTTP_STATUS.CREATED_201).json(createNewPost);
     });
 });
@@ -44,7 +44,7 @@ exports.postsRouter.get("/:id", function (req, res) {
     });
 });
 /******************************* put{id} **********************************/
-exports.postsRouter.put("/:id", authrorisation_1.authMiddleware, validatorMiddleware_1.ValueMiddleware, posts_input_value_middleware_1.inputPosstTitleValidator, posts_input_value_middleware_1.inputPostsShortDescriptionValidator, posts_input_value_middleware_1.inputPostsContentValidator, posts_input_value_middleware_1.inpurtPostsBlogIdValidator, function (req, res) {
+exports.postsRouter.put("/:id", authrorisation_1.authMiddleware, posts_input_value_middleware_1.inputPosstTitleValidator, posts_input_value_middleware_1.inputPostsShortDescriptionValidator, posts_input_value_middleware_1.inputPostsContentValidator, posts_input_value_middleware_1.inpurtPostsBlogIdValidator, validatorMiddleware_1.ValueMiddleware, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const newPost = yield posts_db_repositories_1.postsRepositories.updatePostId(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
         if (!newPost) {

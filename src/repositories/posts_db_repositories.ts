@@ -7,7 +7,7 @@ export const postsRepositories = {
     const filtered: any = {};
     return postsCollection.find(filtered, {projection: {_id: 0}}).toArray();
   },
-  async updatePost(
+  async createPost(
     title: string,
     shortDescription: string,
     content: string,

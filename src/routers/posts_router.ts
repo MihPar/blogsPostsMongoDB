@@ -25,13 +25,13 @@ postsRouter.get("/", async function (req: Request, res: Response) {
 postsRouter.post(
   "/",
   authMiddleware,
-  ValueMiddleware,
   inputPosstTitleValidator,
   inputPostsShortDescriptionValidator,
   inputPostsContentValidator,
   inpurtPostsBlogIdValidator,
+  ValueMiddleware,
   async function (req: Request, res: Response) {
-    const createNewPost: PostsType = await postsRepositories.updatePost(
+    const createNewPost: PostsType = await postsRepositories.createPost(
       req.body.title,
       req.body.shortDescription,
       req.body.content,
@@ -57,11 +57,11 @@ postsRouter.get("/:id", async function (req: Request, res: Response) {
 postsRouter.put(
   "/:id",
   authMiddleware,
-  ValueMiddleware,
   inputPosstTitleValidator,
   inputPostsShortDescriptionValidator,
   inputPostsContentValidator,
   inpurtPostsBlogIdValidator,
+  ValueMiddleware,
   async function (req: Request, res: Response) {
     const newPost = await postsRepositories.updatePostId(
       req.params.id,

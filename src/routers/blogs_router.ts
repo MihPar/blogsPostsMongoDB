@@ -22,11 +22,11 @@ blogsRouter.get("/", async function (req: Request, res: Response) {
 
 blogsRouter.post(
   "/",
-  ValueMiddleware,
   authMiddleware,
   inputBlogNameValidator,
   inputBlogsDescriptionValidator,
   inputBlogsWebsiteUrlValidator,
+  ValueMiddleware,
   async function (req: Request, res: Response) {
     const newPost: BlogsType = await blogsRepositories.createNewBlog(
       req.body.name,
@@ -53,10 +53,10 @@ blogsRouter.get("/:id", async function (req: Request, res: Response) {
 blogsRouter.put(
   "/:id",
   authMiddleware,
-  ValueMiddleware,
   inputBlogNameValidator,
   inputBlogsDescriptionValidator,
   inputBlogsWebsiteUrlValidator,
+  ValueMiddleware,
   async function (req: Request, res: Response) {
     const updateBlogId = await blogsRepositories.updateBlogId(
       req.params.id,
