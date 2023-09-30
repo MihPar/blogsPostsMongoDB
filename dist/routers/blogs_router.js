@@ -61,6 +61,7 @@ exports.blogsRouter.delete('/:id', authrorisation_1.authMiddleware, function (re
         const deleteBlogId = yield blogs_db_repositories_1.blogsRepositories.deleteId(req.params.id);
         if (!deleteBlogId) {
             res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
+            return;
         }
         res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
     });

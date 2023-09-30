@@ -17,6 +17,7 @@ exports.inputBlogsDescriptionValidator = (0, express_validator_1.body)('descript
 exports.inputBlogsWebsiteUrlValidator = (0, express_validator_1.body)('websiteUrl')
     .isString()
     .notEmpty()
+    .isURL()
     .trim()
     .isLength({ min: 1, max: 100 })
     .withMessage('Descriptionme should be length from 1 to 100 symbols');

@@ -46,6 +46,7 @@ exports.postsRouter.get("/:id", function (req, res) {
 /******************************* put{id} **********************************/
 exports.postsRouter.put("/:id", authrorisation_1.authMiddleware, posts_input_value_middleware_1.inputPosstTitleValidator, posts_input_value_middleware_1.inputPostsShortDescriptionValidator, posts_input_value_middleware_1.inputPostsContentValidator, posts_input_value_middleware_1.inpurtPostsBlogIdValidator, validatorMiddleware_1.ValueMiddleware, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // console.log(req.params.id)
         const newPost = yield posts_db_repositories_1.postsRepositories.updatePostId(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
         if (!newPost) {
             res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
@@ -61,6 +62,7 @@ exports.postsRouter.delete('/:id', authrorisation_1.authMiddleware, function (re
         const deletedPostId = yield posts_db_repositories_1.postsRepositories.deletePostId(req.params.id);
         if (!deletedPostId) {
             res.sendStatus(utils_1.HTTP_STATUS.NOT_FOUND_404);
+            return;
         }
         res.sendStatus(utils_1.HTTP_STATUS.NO_CONTENT_204);
     });

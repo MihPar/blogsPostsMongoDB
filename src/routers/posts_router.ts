@@ -63,6 +63,7 @@ postsRouter.put(
   inpurtPostsBlogIdValidator,
   ValueMiddleware,
   async function (req: Request, res: Response) {
+	// console.log(req.params.id)
     const newPost = await postsRepositories.updatePostId(
       req.params.id,
       req.body.title,
@@ -84,6 +85,7 @@ postsRouter.delete('/:id', authMiddleware, async function(req: Request, res: Res
 	const deletedPostId = await postsRepositories.deletePostId(req.params.id)
 	if(!deletedPostId) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
+		return 
 	}
 	res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 })

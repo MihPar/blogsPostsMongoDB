@@ -36,7 +36,7 @@ export const blogsRepositories = {
       { id: id },
       { $set: { name: name, description: description, websiteUrl: websiteUrl } }
     );
-    return result.upsertedCount === 1;
+    return result.modifiedCount === 1;
   },
   async deleteId(id: string): Promise<boolean> {
 	const deleteBlogId = await blogsCollection.deleteOne({id: id})

@@ -41,7 +41,7 @@ exports.blogsRepositories = {
     updateBlogId(id, name, description, websiteUrl) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield db_1.blogsCollection.updateOne({ id: id }, { $set: { name: name, description: description, websiteUrl: websiteUrl } });
-            return result.upsertedCount === 1;
+            return result.modifiedCount === 1;
         });
     },
     deleteId(id) {

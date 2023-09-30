@@ -33,7 +33,8 @@ export const postsRepositories = {
   },
   async updatePostId(id: string, title: string, shortDescription: string, content: string, blogId: string): Promise<boolean> {
 	const result = await postsCollection.updateOne({id: id}, {$set: {title: title, shortDescription: shortDescription, content: content, blogId: blogId}})
-	return result.upsertedCount === 1;
+	console.log(result)
+	return result.modifiedCount === 1;
   }, 
   async deletePostId(id: string): Promise<boolean> {
 	const deletePostId = await postsCollection.deleteOne({id: id})

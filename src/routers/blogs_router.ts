@@ -78,6 +78,7 @@ blogsRouter.delete('/:id', authMiddleware, async function(req: Request, res: Res
 	const deleteBlogId = await blogsRepositories.deleteId(req.params.id)
 	if(!deleteBlogId) {
 		res.sendStatus(HTTP_STATUS.NOT_FOUND_404)
+		return 
 	}
 	res.sendStatus(HTTP_STATUS.NO_CONTENT_204)
 })

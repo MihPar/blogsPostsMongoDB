@@ -45,7 +45,8 @@ exports.postsRepositories = {
     updatePostId(id, title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield db_2.postsCollection.updateOne({ id: id }, { $set: { title: title, shortDescription: shortDescription, content: content, blogId: blogId } });
-            return result.upsertedCount === 1;
+            console.log(result);
+            return result.modifiedCount === 1;
         });
     },
     deletePostId(id) {
