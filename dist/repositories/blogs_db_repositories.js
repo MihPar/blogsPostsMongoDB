@@ -15,7 +15,7 @@ exports.blogsRepositories = {
     findAllBlogs() {
         return __awaiter(this, void 0, void 0, function* () {
             const filtered = {};
-            return db_1.blogsCollection.find(filtered).toArray();
+            return db_1.blogsCollection.find(filtered, { projection: { _id: 0 } }).toArray();
         });
     },
     createNewBlog(name, description, websiteUrl) {
@@ -28,13 +28,13 @@ exports.blogsRepositories = {
                 createdAt: new Date().toISOString(),
                 isMembership: false,
             };
-            const result = yield db_1.blogsCollection.insertOne(newBlog);
+            const result = yield db_1.blogsCollection.insertOne(Object.assign({}, newBlog));
             return newBlog;
         });
     },
     findBlogId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const blogId = yield db_1.blogsCollection.findOne({ id: id });
+            const blogId = yield db_1.blogsCollection.findOne({ id: id }, { projection: { _id: 0 } });
             return blogId ? blogId : null;
         });
     },

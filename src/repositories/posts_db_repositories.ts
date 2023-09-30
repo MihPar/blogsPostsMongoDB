@@ -5,7 +5,7 @@ import { PostsType } from '../db/db';
 export const postsRepositories = {
   async findAllPosts(): Promise<PostsType[]> {
     const filtered: any = {};
-    return postsCollection.find(filtered).toArray();
+    return postsCollection.find(filtered, {projection: {_id: 0}}).toArray();
   },
   async updatePost(
     title: string,
@@ -24,11 +24,11 @@ export const postsRepositories = {
 		blogName: blog.name,
 		createdAt: new Date().toISOString()
 	}
-	const post = await postsCollection.insertOne(newPost)
+	const post = await postsCollection.insertOne({...newPost})
 	return newPost
   },
   async findPostId(id: string): Promise<PostsType | null> {
-	const postId = await postsCollection.findOne({id: id})
+	const postId = await postsCollection.findOne({id: id}, {projection: {_id: 0}})
 	return postId ? postId : null
   },
   async updatePostId(id: string, title: string, shortDescription: string, content: string, blogId: string): Promise<boolean> {

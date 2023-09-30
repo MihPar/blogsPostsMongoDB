@@ -4,7 +4,7 @@ import { BlogsType } from "../db/db";
 export const blogsRepositories = {
   async findAllBlogs(): Promise<BlogsType[]> {
     const filtered: any = {};
-    return blogsCollection.find(filtered).toArray();
+    return blogsCollection.find(filtered, {projection: {_id: 0}}).toArray();
   },
   async createNewBlog(
     name: string,
@@ -19,11 +19,11 @@ export const blogsRepositories = {
       createdAt: new Date().toISOString(),
       isMembership: false,
     };
-    const result = await blogsCollection.insertOne(newBlog);
+    const result = await blogsCollection.insertOne({...newBlog});
     return newBlog;
   },
   async findBlogId(id: string): Promise<BlogsType | null> {
-    const blogId = await blogsCollection.findOne({ id: id });
+    const blogId = await blogsCollection.findOne({ id: id }, {projection: {_id: 0}});
     return blogId ? blogId : null;
   },
   async updateBlogId(

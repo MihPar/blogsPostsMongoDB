@@ -16,7 +16,7 @@ exports.postsRepositories = {
     findAllPosts() {
         return __awaiter(this, void 0, void 0, function* () {
             const filtered = {};
-            return db_2.postsCollection.find(filtered).toArray();
+            return db_2.postsCollection.find(filtered, { projection: { _id: 0 } }).toArray();
         });
     },
     updatePost(title, shortDescription, content, blogId) {
@@ -32,13 +32,13 @@ exports.postsRepositories = {
                 blogName: blog.name,
                 createdAt: new Date().toISOString()
             };
-            const post = yield db_2.postsCollection.insertOne(newPost);
+            const post = yield db_2.postsCollection.insertOne(Object.assign({}, newPost));
             return newPost;
         });
     },
     findPostId(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const postId = yield db_2.postsCollection.findOne({ id: id });
+            const postId = yield db_2.postsCollection.findOne({ id: id }, { projection: { _id: 0 } });
             return postId ? postId : null;
         });
     },
