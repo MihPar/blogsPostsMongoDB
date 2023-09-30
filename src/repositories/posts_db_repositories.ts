@@ -16,7 +16,7 @@ export const postsRepositories = {
 	const blog: any = await blogsCollection.findOne({ id: blogId });
 	// if(!blog) return null
 	const newPost = {
-		id: new Date().toISOString(),
+		// id: new Date().toISOString(),
 		title,
 		shortDescription,
 		content,
