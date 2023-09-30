@@ -12,7 +12,7 @@ export const blogsRepositories = {
     websiteUrl: string
   ): Promise<BlogsType> {
     const newBlog = {
-      id: new Date().toISOString(),
+    //   id: new Date().toISOString(),
       name,
       description,
       websiteUrl,
