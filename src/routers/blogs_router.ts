@@ -33,7 +33,7 @@ blogsRouter.post(
       req.body.description,
       req.body.websiteUrl
     );
-    res.status(HTTP_STATUS.CREATED_201).json(newPost);
+	return res.status(HTTP_STATUS.CREATED_201).json(newPost);
   }
 );
 
