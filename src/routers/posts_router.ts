@@ -48,7 +48,7 @@ postsRouter.get("/:id", async function (req: Request, res: Response) {
   if (!postId) {
     res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
   } else {
-    res.sendStatus(HTTP_STATUS.OK_200);
+    res.status(HTTP_STATUS.OK_200).json(postId);
   }
 });
 
