@@ -25,12 +25,11 @@ postsRouter.get("/", async function (req: Request, res: Response) {
 postsRouter.post(
   "/",
   authMiddleware,
-  ValueMiddleware,
   inputPosstTitleValidator,
   inputPostsShortDescriptionValidator,
   inputPostsContentValidator,
   inpurtPostsBlogIdValidator,
-  
+  ValueMiddleware,
   async function (req: Request, res: Response) {
     const createNewPost: PostsType = await postsRepositories.createPost(
       req.body.title,
