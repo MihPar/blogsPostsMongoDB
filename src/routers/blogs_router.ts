@@ -33,7 +33,7 @@ blogsRouter.post(
       req.body.description,
       req.body.websiteUrl
     );
-	return res.status(HTTP_STATUS.CREATED_201).json(newPost);
+	res.status(HTTP_STATUS.CREATED_201).json(newPost);
   }
 );
 
@@ -44,7 +44,7 @@ blogsRouter.get("/:id", async function (req: Request, res: Response) {
   if (!blogId) {
     res.sendStatus(HTTP_STATUS.NOT_FOUND_404);
   } else {
-    res.sendStatus(HTTP_STATUS.OK_200);
+    res.status(HTTP_STATUS.OK_200).json(blogId);
   }
 });
 
