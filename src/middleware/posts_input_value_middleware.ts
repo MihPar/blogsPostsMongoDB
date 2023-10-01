@@ -5,8 +5,8 @@ export const inpurtPostsBlogIdValidator = body("blogId")
   .isString()
   .trim()
   .notEmpty()
-  .custom((id) => {
-    const blogExist = blogsRepositories.findBlogId(id);
+  .custom(async (id) => {
+    const blogExist = await blogsRepositories.findBlogId(id);
     if (!blogExist) {
       throw new Error("Blog is not exists");
     }
