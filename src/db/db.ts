@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { Collection, MongoClient } from 'mongodb'
 import {config} from 'dotenv'
 
 config()
@@ -38,5 +38,5 @@ export async function runDb() {
 		await client.close()
 	}
 }
-export const blogsCollection = db.collection<BlogsType>('blogs')
-export const postsCollection = db.collection<PostsType>('posts')
+export const blogsCollection: Collection<BlogsType> = db.collection<BlogsType>('blogs')
+export const postsCollection: Collection<PostsType> = db.collection<PostsType>('posts')
